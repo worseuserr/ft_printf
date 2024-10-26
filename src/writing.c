@@ -3,11 +3,10 @@
 #include <io.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include "internal\common.h"
 #define false 0
 #define true 1
 #define bool int
-
-bool	is_valid_arg(const char *s, int i);
 
 bool	write_arg(const char *s, char *str, int i)
 {

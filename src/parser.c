@@ -7,7 +7,7 @@
 #define true 1
 #define bool int
 
-char	*get_ptrval(void *ptr)
+static char	*get_ptrval(void *ptr)
 {
     size_t	addr;
     int		num_digits = 16;
