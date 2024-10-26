@@ -1,5 +1,5 @@
 CC := gcc
-FLAGS := -Werror -Wextra -Wall -g
+FLAGS := -g -fdiagnostics-color=always -Werror -Wextra -Wall
 FILES := main.c src\ft_printf.c src\writing.c src\parser.c
 NAME := out.exe
 RMCMD := del
@@ -16,7 +16,7 @@ fclean:
 	$(RMCMD) *.exe
 
 run: re
-	gdb $(NAME)
+	$(NAME)
 
 test:
 	$(CC) testing.c -o test.exe

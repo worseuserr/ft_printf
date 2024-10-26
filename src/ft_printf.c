@@ -8,7 +8,7 @@
 #define bool int
 
 /*	parser.c	*/
-void	parse_arg(char **out, va_list argv, char *argtypes, int i);
+void	parse_arg(char **out, va_list *argv, char *argtypes, int i);
 
 /*	writing.c	*/
 void	write_formatted(const char *s, char **strs);
@@ -63,7 +63,7 @@ char	*get_arg_types(const char *s, int count)
 	return (out);
 }
 
-char	**get_strs(va_list argv, size_t argn, char *argtypes)
+char	**get_strs(va_list *argv, size_t argn, char *argtypes)
 {
 	size_t	i;
 	char	**out;
@@ -80,18 +80,18 @@ char	**get_strs(va_list argv, size_t argn, char *argtypes)
 	return (out);
 }
 
-void	ft_printf(const char *s, ...)
+void	ft_printf(const char *str, ...)
 {
 	va_list	argv;
 	size_t	argn;
 	char	*argtypes;
 	char	**strs;
 
-	argn = count_args(s);
-	argtypes = get_arg_types(s, argn);
-	va_start(argv, s);
-	strs = get_strs(argv, argn, argtypes);
-	write_formatted(s, strs);
+	argn = count_args(str);
+	argtypes = get_arg_types(str, argn);
+	va_start(argv, str);
+	strs = get_strs(&argv, argn, argtypes);
+	write_formatted(str, strs);
 	va_end(argv);
 	free(argtypes);
 	while(argn-- > 0)
