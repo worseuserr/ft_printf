@@ -33,13 +33,23 @@ static bool	is_lenarg(char *c, const char *pattern)
 		return (true);
 	return (false);
 }
+// if (is_lenarg(&str[i], "hh"))
+// 			arg.length = CHAR_INT;
+// 		else if (is_lenarg(&str[i], "ll"))
+// 			arg.length = LLONG;
+
+
 
 //												   *argv -> pass in the va_list in case the width field is dynamic (*)
 Arg	parse_arg(const char *str, int *index, va_list *argv)
 {
-	int	i;
+	Arg	arg;
 
-	i = 0;
+	parse_precision(&arg, str, index, argv);
+	parse_width(&arg, str, index, argv);
+	parse_length(&arg, str, index);
+	parse_type(&arg, str, index);
+	return (arg);
 }
 
 

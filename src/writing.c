@@ -33,7 +33,13 @@ void	write_formatted(const char *str, va_list *argv)
 	while (str[i])
 	{
 		if (str[i] == '%')
+		{
+			if (str[i + 1] == '%')
+				write(1, &str[i++], 1);
 			write_arg(parse_arg(str, &i, &argv), &argv);
+		}
+		else
+			write(1, &str[i], 1);
 		i++;
 	}
 }

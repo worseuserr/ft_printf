@@ -12,7 +12,8 @@ typedef enum {
 	LONG,
 	LLONG,
 	LDOUBLE,
-	SIZET
+	SIZET,
+	NONE
 } ArgLength;
 
 typedef enum {
@@ -27,8 +28,6 @@ typedef enum {
 } ArgType;
 
 typedef struct Arg {
-	char			*ids;
-	void			*value;
 	unsigned int	width;
 	unsigned int	precision;
 	enum ArgType	type;
