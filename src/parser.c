@@ -3,6 +3,7 @@
 #include <io.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include "internal\common.h"
 #define false 0
 #define true 1
 #define bool int
@@ -26,17 +27,33 @@ static char	*get_ptrval(void *ptr)
 	return (hex_digits);
 }
 
-void	parse_arg(char **out, va_list *argv, char *argtypes, int i)
+static bool	is_lenarg(char *c, const char *pattern)
 {
-	// printf("[%p, %s, %d]\n", out, argtypes, i);
-	// printf("|%c|\n", argtypes[i]);
-	if (argtypes[i] == 's')
-		out[i] = strdup(va_arg(*argv, char *));
-	else if (argtypes[i] == 'd')
-		out[i] = itoa(va_arg(*argv, int), calloc(sizeof(int), 9), 10);
-	else if (argtypes[i] == 'l')
-		out[i] = ltoa(va_arg(*argv, long), calloc(sizeof(long), 9), 10);
-	else if (argtypes[i] == 'p')
-		out[i] = get_ptrval(va_arg(*argv, void *));
-	// printf(":%s:\n", out[i]);
+	if (*c == *pattern && *(c + 1) == *(pattern + 1))
+		return (true);
+	return (false);
 }
+
+//												   *argv -> pass in the va_list in case the width field is dynamic (*)
+Arg	parse_arg(const char *str, int *index, va_list *argv)
+{
+	int	i;
+
+	i = 0;
+}
+
+
+// void	parse_arg(char **out, va_list *argv, char *argtypes, int i)
+// {
+// 	// printf("[%p, %s, %d]\n", out, argtypes, i);
+// 	// printf("|%c|\n", argtypes[i]);
+// 	if (argtypes[i] == 's')
+// 		out[i] = strdup(va_arg(*argv, char *));
+// 	else if (argtypes[i] == 'd')
+// 		out[i] = itoa(va_arg(*argv, int), calloc(sizeof(int), 9), 10);
+// 	else if (argtypes[i] == 'l')
+// 		out[i] = ltoa(va_arg(*argv, long), calloc(sizeof(long), 9), 10);
+// 	else if (argtypes[i] == 'p')
+// 		out[i] = get_ptrval(va_arg(*argv, void *));
+// 	// printf(":%s:\n", out[i]);
+// }

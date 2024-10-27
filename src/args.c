@@ -8,6 +8,13 @@
 #define true 1
 #define bool int
 
+
+
+enum ArgType	typeof(char c)
+{
+
+}
+
 bool	is_valid_arg(const char *s, int i)
 {
 	if (s[i] == '%' && strchr("scpldz", s[i + 1]))
